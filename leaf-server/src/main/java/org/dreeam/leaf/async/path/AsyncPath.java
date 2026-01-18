@@ -270,4 +270,10 @@ public class AsyncPath extends Path {
         return super.getPreviousNode();
     }
 
+    @Override
+    public boolean sameAs(@Nullable Path path) {
+        if (path == this) return true;
+        this.process();
+        return super.sameAs(path);
+    }
 }
