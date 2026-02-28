@@ -6,6 +6,7 @@ Subject: [PATCH] configurable goal update interval
 The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-ticking.patch
 
 diff --git a/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java b/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
+index 526e9538d617ae4db85f0b85533cc8c3c85566a2..60a0bb67330f8231eee89c55272041479c80e58e 100644
 --- a/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
 @@ -63,8 +63,10 @@ public class AvoidEntityGoal<T extends LivingEntity> extends Goal {
@@ -20,6 +21,7 @@ diff --git a/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java b/net/minec
              .getNearestEntity(
                  this.mob.level().getEntitiesOfClass(this.avoidClass, this.mob.getBoundingBox().inflate(this.maxDist, 3.0, this.maxDist), livingEntity -> true),
 diff --git a/net/minecraft/world/entity/ai/goal/FollowParentGoal.java b/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
+index 3b158592d97f5ee2ad10b1da75101cb1669871a3..0d5b565dc7c8d5dd1394b31b388b7d39abaa935b 100644
 --- a/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
 @@ -18,8 +18,10 @@ public class FollowParentGoal extends Goal {
@@ -34,6 +36,7 @@ diff --git a/net/minecraft/world/entity/ai/goal/FollowParentGoal.java b/net/mine
              return false;
          } else {
 diff --git a/net/minecraft/world/entity/ai/goal/TemptGoal.java b/net/minecraft/world/entity/ai/goal/TemptGoal.java
+index db3f5164170a29570a2b050328b34c918b526a2a..c2c96dc8e023d6b949cd35a2bca83eca583a4460 100644
 --- a/net/minecraft/world/entity/ai/goal/TemptGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/TemptGoal.java
 @@ -50,12 +50,14 @@ public class TemptGoal extends Goal {
@@ -64,6 +67,7 @@ diff --git a/net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGo
          this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(selector);
      }
 diff --git a/net/minecraft/world/entity/monster/EnderMan.java b/net/minecraft/world/entity/monster/EnderMan.java
+index 809933cf4eea9dcedae4195cfecfe392973e96b6..e3901f14d7414b03df30db8c877085769cc771f0 100644
 --- a/net/minecraft/world/entity/monster/EnderMan.java
 +++ b/net/minecraft/world/entity/monster/EnderMan.java
 @@ -587,8 +587,10 @@ public class EnderMan extends Monster implements NeutralMob {
