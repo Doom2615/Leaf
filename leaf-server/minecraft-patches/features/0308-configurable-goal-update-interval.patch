@@ -5,9 +5,6 @@ Subject: [PATCH] configurable goal update interval
 
 The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-ticking.patch
 
---git a/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java b/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
---- a/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
-+++ b/net/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
 @@ -63,8 +63,10 @@ public class AvoidEntityGoal<T extends LivingEntity> extends Goal {
          this(mob, avoidClass, livingEntity -> true, maxDist, walkSpeedModifier, sprintSpeedModifier, predicateOnAvoidEntity);
      }
@@ -19,9 +16,7 @@ The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-
          this.toAvoid = getServerLevel(this.mob)
              .getNearestEntity(
                  this.mob.level().getEntitiesOfClass(this.avoidClass, this.mob.getBoundingBox().inflate(this.maxDist, 3.0, this.maxDist), livingEntity -> true),
---git a/net/minecraft/world/entity/ai/goal/FollowParentGoal.java b/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
---- a/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
-+++ b/net/minecraft/world/entity/ai/goal/FollowParentGoal.java
+
 @@ -18,8 +18,10 @@ public class FollowParentGoal extends Goal {
          this.speedModifier = speedModifier;
      }
@@ -33,9 +28,7 @@ The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-
          if (this.animal.getAge() >= 0) {
              return false;
          } else {
---git a/net/minecraft/world/entity/ai/goal/TemptGoal.java b/net/minecraft/world/entity/ai/goal/TemptGoal.java
---- a/net/minecraft/world/entity/ai/goal/TemptGoal.java
-+++ b/net/minecraft/world/entity/ai/goal/TemptGoal.java
+
 @@ -50,12 +50,14 @@ public class TemptGoal extends Goal {
          this.targetingConditions = globalTemptationLookupIndex >= 0 ? TEMPT_TARGETING.copy() : TEMPT_TARGETING.copy().selector((entity, level) -> this.shouldFollow(entity)); // Paper - optimise temptation checks - skip selector if we have a lookup index.
      }
@@ -51,9 +44,6 @@ The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-
              // Paper start - optimise temptation lookups
              final TargetingConditions rangeTargetingConditions = this.targetingConditions.range(this.mob.getAttributeValue(Attributes.TEMPT_RANGE));
  
---git a/net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal.java b/net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal.java
---- a/net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal.java
-+++ b/net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal.java
 @@ -35,7 +35,7 @@ public class NearestAttackableTargetGoal<T extends LivingEntity> extends TargetG
      ) {
          super(mob, mustSee, mustReach);
@@ -63,9 +53,7 @@ The alternative solution of Pufferfish's Throttle-goal-selector-during-inactive-
          this.setFlags(EnumSet.of(Goal.Flag.TARGET));
          this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(selector);
      }
---git a/net/minecraft/world/entity/monster/EnderMan.java b/net/minecraft/world/entity/monster/EnderMan.java
---- a/net/minecraft/world/entity/monster/EnderMan.java
-+++ b/net/minecraft/world/entity/monster/EnderMan.java
+
 @@ -587,8 +587,10 @@ public class EnderMan extends Monster implements NeutralMob {
              this.startAggroTargetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(this.isAngerInducing);
          }
